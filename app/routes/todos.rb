@@ -10,5 +10,16 @@ module TodoAPI::Routes
       todo = Model::Todo.find(id: params[:id])
       todo.extend(Representer::Todo).to_json
     end
+
+    post "/todos" do
+      todo = Model::Todo.create(todo_params)
+      todo.extend(Representer::Todo).to_json
+    end
+
+    private
+
+    def todo_params
+      { title: params[:title] }
+    end
   end
 end

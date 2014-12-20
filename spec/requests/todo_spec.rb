@@ -20,4 +20,15 @@ describe "Todo endpoint" do
       expect(last_response.body).to eq(serialized_todo)
     end
   end
+
+  describe "POST /todos" do
+    it "creates a new todo" do
+      todo_params = { title: "Allow people to post new todos" }
+
+      expect {
+        post "/todos", todo_params
+      }.to change { Model::Todo.count }.by(1)
+      expect(last_response.status).to eq(200)
+    end
+  end
 end
