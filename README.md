@@ -13,6 +13,7 @@ rake db:migrate RACK_ENV=test # migrate test db
 ```
 
 You can run the specs with the default `rake` command.
+The server can be started with foreman by running `foreman start`.
 
 ## System requirements
 - Ruby 2.1.5
