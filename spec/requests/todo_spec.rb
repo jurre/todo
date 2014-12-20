@@ -35,5 +35,15 @@ describe "Todo endpoint" do
       }.to change { Model::Todo.count }.by(1)
       expect(last_response.status).to eq(200)
     end
+
+    it "returns a 422 for invalid requests" do
+      invalid_params = { some_random_key: "LOL this won't work!" }
+
+      post "/todos", invalid_params
+      expect(last_response.status).to eq(400)
+      expect(JSON.parse(last_response.body)).to eq({
+        "title" => ["cannot be empty"]
+      })
+    end
   end
 end

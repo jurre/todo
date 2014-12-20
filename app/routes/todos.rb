@@ -15,8 +15,13 @@ module TodoAPI::Routes
     end
 
     post "/todos" do
-      todo = Model::Todo.create(todo_params)
-      todo.extend(Representer::Todo).to_json
+      todo = Model::Todo.new(todo_params)
+      if todo.valid?
+        todo.save.extend(Representer::Todo).to_json
+      else
+        status 400
+        todo.errors.to_json
+      end
     end
 
     private
