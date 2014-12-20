@@ -7,8 +7,11 @@ module TodoAPI::Routes
     end
 
     get "/todos/:id" do
-      todo = Model::Todo.find(id: params[:id])
-      todo.extend(Representer::Todo).to_json
+      if todo = Model::Todo.find(id: params[:id])
+        todo.extend(Representer::Todo).to_json
+      else
+        status 404
+      end
     end
 
     post "/todos" do
