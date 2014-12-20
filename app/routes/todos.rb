@@ -24,10 +24,26 @@ module TodoAPI::Routes
       end
     end
 
+    patch "/todos/:id" do
+      if todo = Model::Todo.find(id: params[:id])
+        if todo.set(todo_params).valid?
+          todo.save.extend(Representer::Todo).to_json
+        else
+          status 400
+          todo.errors.to_json
+        end
+      else
+        status 404
+      end
+    end
+
     private
 
     def todo_params
-      { title: params[:title] }
+      {
+        title: params[:title],
+        completed: params[:completed]
+      }.select! { |k, _| params.has_key?(k.to_s) }
     end
   end
 end

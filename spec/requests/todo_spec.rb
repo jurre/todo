@@ -46,4 +46,33 @@ describe "Todo endpoint" do
       })
     end
   end
+
+  describe "PATCH /todos/:id" do
+    let(:todo) { Model::Todo.create(title: "We need to complete todos, right?!") }
+
+    it "updates a todo" do
+      params = { completed: true }
+
+      patch "/todos/#{todo.id}", params
+
+      expect(last_response.status).to eq(200)
+      expect(todo.reload.completed).to eq(true)
+    end
+
+    it "returns a 400 for invalid requests" do
+      invalid_params = { title: nil }
+
+      patch "/todos/#{todo.id}", invalid_params
+
+      expect(last_response.status).to eq(400)
+    end
+
+    it "returns a 404 when the todo can't be found" do
+      params = { completed: true }
+
+      patch "/todos/123", params
+
+      expect(last_response.status).to eq(404)
+    end
+  end
 end
