@@ -14,6 +14,7 @@ gem "sequel"
 gem "sinatra-sequel"
 gem "pg"
 gem "roar"
+gem "bcrypt"
 
 group :test do
   gem "rspec"

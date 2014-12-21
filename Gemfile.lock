@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    bcrypt (3.1.7)
     diff-lcs (1.2.5)
     dotenv (1.0.2)
     foreman (0.76.0)
@@ -56,6 +57,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt
   dotenv
   foreman
   pg
