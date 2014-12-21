@@ -1,4 +1,3 @@
-require "roar/decorator"
 require "roar/representer/json/hal"
 
 module Representer
