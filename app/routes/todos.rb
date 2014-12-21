@@ -5,13 +5,13 @@ module TodoAPI::Routes
     end
 
     get "/todos" do
-      todos = Model::Todo.order(:id).all
+      todos = Model::Todo.where(user: current_user).all
       Model::TodoCollection.new(todos).
         extend(Representer::Todo::Collection).to_json
     end
 
     get "/todos/:id" do
-      if todo = Model::Todo.find(id: params[:id])
+      if todo = Model::Todo.find(id: params[:id], user: current_user)
         todo.extend(Representer::Todo).to_json
       else
         status 404
@@ -29,7 +29,7 @@ module TodoAPI::Routes
     end
 
     patch "/todos/:id" do
-      if todo = Model::Todo.find(id: params[:id])
+      if todo = Model::Todo.find(id: params[:id], user: current_user)
         if todo.set(todo_params).valid?
           todo.save.extend(Representer::Todo).to_json
         else
@@ -42,7 +42,7 @@ module TodoAPI::Routes
     end
 
     delete "/todos/:id" do
-      if todo = Model::Todo.find(id: params[:id])
+      if todo = Model::Todo.find(id: params[:id], user: current_user)
         todo.destroy
       else
         status 404
@@ -54,8 +54,9 @@ module TodoAPI::Routes
     def todo_params
       {
         title: params["title"],
-        completed: params["completed"]
+        completed: params["completed"],
       }.select! { |k, _| params.has_key?(k.to_s) }
+        .merge(user: current_user)
     end
   end
 end

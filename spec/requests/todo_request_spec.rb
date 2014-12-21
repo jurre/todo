@@ -1,8 +1,9 @@
 require "spec_helper"
 
 describe "Todo endpoint" do
+  let(:user) { Model::User.create(username: "Lana", password: "ants") }
+
   before(:each) do
-    user = double(:user)
     allow_any_instance_of(TodoAPI::Routes::Todos).to receive(:current_user) { user }
   end
 
@@ -16,7 +17,7 @@ describe "Todo endpoint" do
 
   describe "GET /todos/:id" do
     it "returns a single todo" do
-      todo = Model::Todo.create(title: "Make this endpoint work")
+      todo = Model::Todo.create(title: "Make this endpoint work", user: user)
       serialized_todo = todo.extend(Representer::Todo).to_json
 
       get "/todos/#{todo.id}"
@@ -38,6 +39,7 @@ describe "Todo endpoint" do
       expect {
         post_json "/todos", todo_params
       }.to change { Model::Todo.count }.by(1)
+      expect(Model::Todo.last.user).to eq(user)
       expect(last_response.status).to eq(200)
     end
 
@@ -53,7 +55,9 @@ describe "Todo endpoint" do
   end
 
   describe "PATCH /todos/:id" do
-    let(:todo) { Model::Todo.create(title: "We need to complete todos, right?!") }
+    let(:todo) { 
+      Model::Todo.create(title: "We need to complete todos, right?!", user: user)
+    }
 
     it "updates a todo" do
       params = { completed: true }
@@ -82,7 +86,7 @@ describe "Todo endpoint" do
   end
 
   describe "DELETE /todos/:id" do
-    let(:todo) { Model::Todo.create(title: "Allow deleting todos") }
+    let(:todo) { Model::Todo.create(title: "Allow deleting todos", user: user) }
 
     it "deletes the todo" do
       delete "/todos/#{todo.id}"

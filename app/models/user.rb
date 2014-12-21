@@ -1,5 +1,6 @@
 class Model::User < Sequel::Model
   plugin :timestamps, update_on_create: true
+  one_to_many :todos
 
   def self.authenticate(username, pass)
     user = Model::User.find(username: username)
