@@ -49,8 +49,8 @@ module TodoAPI::Routes
 
     def todo_params
       {
-        title: params[:title],
-        completed: params[:completed]
+        title: params["title"],
+        completed: params["completed"]
       }.select! { |k, _| params.has_key?(k.to_s) }
     end
   end

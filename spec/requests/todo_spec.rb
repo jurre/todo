@@ -31,7 +31,7 @@ describe "Todo endpoint" do
       todo_params = { title: "Allow people to post new todos" }
 
       expect {
-        post "/todos", todo_params
+        post_json "/todos", todo_params
       }.to change { Model::Todo.count }.by(1)
       expect(last_response.status).to eq(200)
     end
@@ -39,7 +39,7 @@ describe "Todo endpoint" do
     it "returns a 422 for invalid requests" do
       invalid_params = { some_random_key: "LOL this won't work!" }
 
-      post "/todos", invalid_params
+      post_json "/todos", invalid_params
       expect(last_response.status).to eq(400)
       expect(JSON.parse(last_response.body)).to eq({
         "title" => ["cannot be empty"]
@@ -53,7 +53,7 @@ describe "Todo endpoint" do
     it "updates a todo" do
       params = { completed: true }
 
-      patch "/todos/#{todo.id}", params
+      patch_json "/todos/#{todo.id}", params
 
       expect(last_response.status).to eq(200)
       expect(todo.reload.completed).to eq(true)
@@ -62,7 +62,7 @@ describe "Todo endpoint" do
     it "returns a 400 for invalid requests" do
       invalid_params = { title: nil }
 
-      patch "/todos/#{todo.id}", invalid_params
+      patch_json "/todos/#{todo.id}", invalid_params
 
       expect(last_response.status).to eq(400)
     end
@@ -70,7 +70,7 @@ describe "Todo endpoint" do
     it "returns a 404 when the todo can't be found" do
       params = { completed: true }
 
-      patch "/todos/123", params
+      patch_json "/todos/123", params
 
       expect(last_response.status).to eq(404)
     end
