@@ -37,6 +37,14 @@ module TodoAPI::Routes
       end
     end
 
+    delete "/todos/:id" do
+      if todo = Model::Todo.find(id: params[:id])
+        todo.destroy
+      else
+        status 404
+      end
+    end
+
     private
 
     def todo_params

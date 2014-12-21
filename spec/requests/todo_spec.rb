@@ -75,4 +75,15 @@ describe "Todo endpoint" do
       expect(last_response.status).to eq(404)
     end
   end
+
+  describe "DELETE /todos/:id" do
+    let(:todo) { Model::Todo.create(title: "Allow deleting todos") }
+
+    it "deletes the todo" do
+      delete "/todos/#{todo.id}"
+
+      expect(last_response.status).to eq(200)
+      expect(todo.exists?).to eq(false)
+    end
+  end
 end
