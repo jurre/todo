@@ -10,7 +10,7 @@ module Representer
     property :completed
 
     link :self do
-      "/todos/#{id}"
+      "#{ENV["BASE_URL"]}/todos/#{id}"
     end
   end
 
@@ -22,7 +22,7 @@ module Representer
     collection :todos, extend: Todo, embedded: true
 
     link :self do
-      "/todos"
+      "#{ENV["BASE_URL"]}/todos"
     end
   end
 end

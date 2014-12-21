@@ -10,7 +10,7 @@ describe Representer::Todo do
       "title" => "Serialize me",
       "completed" => true,
       "_links" =>  {
-        "self" => { href: "/todos/1" }
+        "self" => { href: "#{ENV["BASE_URL"]}/todos/1" }
       }
     })
   end
