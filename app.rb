@@ -36,6 +36,7 @@ module TodoAPI
     use Rack::Deflater
     use Routes::Todos
     use Routes::Tokens
+    use Routes::Users
   end
 end
 
