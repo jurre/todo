@@ -1,6 +1,11 @@
 require "spec_helper"
 
 describe "Todo endpoint" do
+  before(:each) do
+    user = double(:user)
+    allow_any_instance_of(TodoAPI::Routes::Todos).to receive(:current_user) { user }
+  end
+
   describe "GET /todos" do
     it "returns todos" do
       get "/todos"

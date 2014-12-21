@@ -1,5 +1,9 @@
 module TodoAPI::Routes
   class Todos < Base
+    before "/todos*" do
+      halt 401, { message: "invalid_token" }.to_json unless current_user
+    end
+
     get "/todos" do
       todos = Model::Todo.order(:id).all
       Model::TodoCollection.new(todos).

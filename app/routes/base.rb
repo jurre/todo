@@ -14,6 +14,10 @@ module TodoAPI::Routes
 
     private
 
+    def current_user
+      @current_user ||= Model::User.find(token: env["HTTP_X_AUTHORIZATION"])
+    end
+
     def merge_json_body_params
       request.body.rewind
       begin
