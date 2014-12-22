@@ -37,6 +37,7 @@ module TodoAPI
     use Routes::Todos
     use Routes::Tokens
     use Routes::Users
+    use Routes::Root
   end
 end
 
