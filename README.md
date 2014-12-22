@@ -65,7 +65,6 @@ Once we do this we can retrieve a token by posting this same info to `/tokens`
   "token": "i8gT-xL6QCKj_bwFr9JPOA",
   "_embedded": {
     "user": {
-      "id": 2,
       "username": "jurrre"
     }
   }
@@ -83,7 +82,6 @@ Now we can start creating Todo's by posting to `/todos`
 
 // RESPONSE
 {
-  "id": 2,
   "title": "Make a client app",
   "completed": false,
   "_links": {
@@ -105,7 +103,6 @@ We can fetch a collection of todos by getting from `/todos`
   "_embedded": {
     "todos": [
     {
-      "id": 1,
       "title": "Make a client app",
       "completed": false,
       "_links": {
@@ -115,7 +112,6 @@ We can fetch a collection of todos by getting from `/todos`
       }
     },
     {
-      "id": 2,
       "title": "Make an iOS app",
       "completed": false,
       "_links": {
