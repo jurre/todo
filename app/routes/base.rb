@@ -6,7 +6,7 @@ module TodoAPI::Routes
       content_type "application/hal+json"
       headers "Access-Control-Allow-Origin" => "*",
         "Access-Control-Allow-Methods" => %w(OPTIONS GET POST PUT DELETE),
-        "Access-Control-Allow-Headers" => "Content-Type"
+        "Access-Control-Allow-Headers" => %w(Content-Type X-Authorization)
       merge_json_body_params
     end
 
