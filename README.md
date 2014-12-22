@@ -22,9 +22,30 @@ The server can be started with foreman by running `foreman start`.
 ## Endpoints
 Right now, from the perspective of the client there are 3 entities, Users, Todos and Tokens.
 
-We can create a user by posting to `/users` with a username and desired password
+There is a root/index document at `/`
+```json
+// GET /
+{
+  "_links": {
+    "self": {
+      "href": "http://localhost:5000/"
+    },
+    "todos": {
+      "href": "http://localhost:5000/todos"
+    },
+    "tokens": {
+      "href": "http://localhost:5000/tokens"
+    },
+    "users": {
+      "href": "http://localhost:5000/users"
+    }
+  }
+}
 ```
-POST /users
+
+We can create a user by posting to `/users` with a username and desired password
+```json
+// POST /users
 {
   "username": "jurrre",
   "password": "2s3cr3t4u"
@@ -32,14 +53,14 @@ POST /users
 ```
 
 Once we do this we can retrieve a token by posting this same info to `/tokens`
-```
-POST /tokens
+```json
+// POST /tokens
 {
-  "username": "jurrre"
+  "username": "jurrre",
   "password": "2s3cr3t4u"
 }
 
-# RESPONSE
+// RESPONSE
 {
   "token": "i8gT-xL6QCKj_bwFr9JPOA",
   "_embedded": {
@@ -52,15 +73,15 @@ POST /tokens
 ```
 
 Now we can start creating Todo's by posting to `/todos`
-```
-POST /todos
-X-Authorization: i8gT-xL6QCKj_bwFr9JPOA
-Body:
+```json
+// POST /todos
+// X-Authorization: i8gT-xL6QCKj_bwFr9JPOA
+// Body:
 {
   "title": "Make a client app"
 }
 
-# RESPONSE
+// RESPONSE
 {
   "id": 2,
   "title": "Make a client app",
@@ -74,11 +95,11 @@ Body:
 ```
 
 We can fetch a collection of todos by getting from `/todos`
-```
-GET /todos
-X-Authorization: i8gT-xL6QCKj_bwFr9JPOA
+```json
+//GET /todos
+// X-Authorization: i8gT-xL6QCKj_bwFr9JPOA
 
-# RESPONSE
+// RESPONSE
 {
   "total": 2,
   "_embedded": {
