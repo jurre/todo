@@ -1,7 +1,7 @@
 module TodoAPI::Routes
   class Todos < Base
     before "/todos*" do
-      halt 401, { message: "invalid_token" }.to_json unless current_user
+      require_authentication
     end
 
     get "/todos" do

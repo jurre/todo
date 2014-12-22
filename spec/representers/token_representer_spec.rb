@@ -10,7 +10,10 @@ describe Representer::Token do
       "token" => "some_token",
       :_embedded => {
         "user" => {
-          "username" => "Luke"
+          "username" => "Luke",
+          "_links" => {
+            "self" => { href: "#{ENV["BASE_URL"]}/users/me" }
+          }
         }
       }
     })

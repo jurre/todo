@@ -7,4 +7,5 @@ module Representer::Root
   link(:todos) { "#{ENV["BASE_URL"]}/todos" }
   link(:tokens) { "#{ENV["BASE_URL"]}/tokens" }
   link(:users) { "#{ENV["BASE_URL"]}/users" }
+  link(:current_user) { "#{ENV["BASE_URL"]}/users/me" }
 end

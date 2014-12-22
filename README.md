@@ -38,6 +38,9 @@ There is a root/index document at `/`
     },
     "users": {
       "href": "http://localhost:5000/users"
+    },
+    "current_user": {
+      "href": "http://localhost:5000/users/me"
     }
   }
 }
@@ -65,7 +68,12 @@ Once we do this we can retrieve a token by posting this same info to `/tokens`
   "token": "i8gT-xL6QCKj_bwFr9JPOA",
   "_embedded": {
     "user": {
-      "username": "jurrre"
+      "username": "jurrre",
+      "_links": {
+        "self": {
+          "href": "http://localhost:5000/users/me"
+        }
+      }
     }
   }
 }
@@ -94,7 +102,7 @@ Now we can start creating Todo's by posting to `/todos`
 
 We can fetch a collection of todos by getting from `/todos`
 ```json
-//GET /todos
+// GET /todos
 // X-Authorization: i8gT-xL6QCKj_bwFr9JPOA
 
 // RESPONSE
@@ -125,6 +133,21 @@ We can fetch a collection of todos by getting from `/todos`
   "_links": {
     "self": {
       "href": "http://localhost:5000/todos"
+    }
+  }
+}
+```
+
+We can fetch the current user from `/users/me`
+```json
+// GET /users/me
+// X-Authorization: i8gT-xL6QCKj_bwFr9JPOA
+
+{
+  "username": "jurrre",
+  "_links": {
+    "self": {
+      "href": "http://localhost:5000/users/me"
     }
   }
 }

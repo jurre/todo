@@ -10,6 +10,12 @@ module TodoAPI::Routes
       end
     end
 
+    get "/users/me" do
+      require_authentication
+
+      current_user.extend(Representer::User).to_json
+    end
+
     def user_params
       { username: params["username"], password: params["password"] }
     end

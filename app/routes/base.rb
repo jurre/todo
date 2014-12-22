@@ -14,6 +14,10 @@ module TodoAPI::Routes
 
     private
 
+    def require_authentication
+      halt 401, { message: "invalid_token" }.to_json unless current_user
+    end
+
     def current_user
       @current_user ||= Model::User.find(token: env["HTTP_X_AUTHORIZATION"])
     end

@@ -6,7 +6,10 @@ describe Representer::User do
     represented = user.extend(Representer::User).to_hash
 
     expect(represented).to eq({
-      "username" => "Picard"
+      "username" => "Picard",
+      "_links" => {
+        "self" => { href: "#{ENV["BASE_URL"]}/users/me" }
+      }
     })
   end
 end

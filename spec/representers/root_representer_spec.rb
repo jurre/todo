@@ -17,6 +17,9 @@ describe Representer::Root do
         },
         "tokens" => {
           href: "#{ENV["BASE_URL"]}/tokens"
+        },
+        "current_user" => {
+          href: "#{ENV["BASE_URL"]}/users/me"
         }
       }
     })
