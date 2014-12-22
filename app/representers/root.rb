@@ -1,11 +1,9 @@
-require "roar/representer/json/hal"
-
 module Representer::Root
-  include Roar::Representer::JSON::HAL
+  include Representer::Base
 
-  link(:self) { "#{ENV["BASE_URL"]}/" }
-  link(:todos) { "#{ENV["BASE_URL"]}/todos" }
-  link(:tokens) { "#{ENV["BASE_URL"]}/tokens" }
-  link(:users) { "#{ENV["BASE_URL"]}/users" }
-  link(:current_user) { "#{ENV["BASE_URL"]}/users/me" }
+  link(:self) { link_to "/" }
+  link(:todos) { link_to "/todos" }
+  link(:tokens) { link_to "/tokens" }
+  link(:users) { link_to "/users" }
+  link(:current_user) { link_to "/users/me" }
 end
