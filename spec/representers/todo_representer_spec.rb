@@ -6,7 +6,6 @@ describe Representer::Todo do
     represented = todo.extend(Representer::Todo).to_hash
 
     expect(represented).to eq({
-      "id" => 1,
       "title" => "Serialize me",
       "completed" => true,
       "_links" =>  {

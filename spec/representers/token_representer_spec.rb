@@ -10,7 +10,6 @@ describe Representer::Token do
       "token" => "some_token",
       :_embedded => {
         "user" => {
-          "id" => 1,
           "username" => "Luke"
         }
       }

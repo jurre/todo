@@ -4,7 +4,6 @@ module Representer
   module Todo
     include Roar::Representer::JSON::HAL
 
-    property :id
     property :title
     property :completed
 

@@ -6,7 +6,6 @@ describe Representer::User do
     represented = user.extend(Representer::User).to_hash
 
     expect(represented).to eq({
-      "id" => 1,
       "username" => "Picard"
     })
   end
