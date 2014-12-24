@@ -20,7 +20,7 @@ module TodoAPI::Routes
     private
 
     def require_authentication
-      halt 401, { message: "invalid_token" }.to_json unless current_user
+      halt 401, { message: "invalid_token" }.to_json unless current_user || request.options?
     end
 
     def current_user
