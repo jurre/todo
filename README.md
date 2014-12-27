@@ -33,6 +33,10 @@ There is a root/index document at `/`
     "todos": {
       "href": "http://localhost:5000/todos"
     },
+    "todo": {
+      "href": "http://localhost:5000/todos/{id}",
+      "templated": true
+    },
     "tokens": {
       "href": "http://localhost:5000/tokens"
     },

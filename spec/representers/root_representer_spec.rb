@@ -15,6 +15,10 @@ describe Representer::Root do
         "todos" => {
           href: "#{ENV["BASE_URL"]}/todos"
         },
+        "todo" => {
+          href: "#{ENV["BASE_URL"]}/todos/{id}",
+          templated: true
+        },
         "tokens" => {
           href: "#{ENV["BASE_URL"]}/tokens"
         },
