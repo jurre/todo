@@ -13,6 +13,15 @@ describe Representer::Todo do
       }
     })
   end
+
+  it "parses correctly" do
+    todo = Model::Todo.new.extend(Representer::Todo)
+    json_body = { title: "Do the laundry" }.to_json
+
+    todo.from_json(json_body)
+
+    expect(todo.title).to eq("Do the laundry")
+  end
 end
 
 describe Representer::Todo::Collection do

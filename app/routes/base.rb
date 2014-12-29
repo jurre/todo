@@ -28,11 +28,17 @@ module TodoAPI::Routes
     end
 
     def merge_json_body_params
-      request.body.rewind
       begin
-        params.merge! JSON.parse(request.body.read, symbolize_keys: true)
+        params.merge! JSON.parse(request_body, symbolize_keys: true)
       rescue JSON::ParserError
       end
+    end
+
+    def request_body
+      @request_body ||= begin
+                  request.body.rewind
+                  request.body.read
+                end
     end
   end
 end
