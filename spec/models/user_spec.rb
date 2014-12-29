@@ -10,6 +10,7 @@ describe Model::User do
 
   it "generates a random token" do
     user = Model::User.create(username: "Kirk", password: "s3cur3")
+    user.generate_token!
     expect(user.token).to_not eq(nil)
   end
 
@@ -24,7 +25,7 @@ describe Model::User do
     let!(:user) { Model::User.create(username: "Archer", password: "duchess009") }
 
     it "authenticates existing users" do
-      expect(Model::User.authenticate("Archer", "duchess009")).to eq(user)
+      expect(Model::User.authenticate("Archer", "duchess009")).to eq(user.reload)
     end
 
     it "fails with wrong password" do

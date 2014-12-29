@@ -12,7 +12,7 @@ describe "Token endpoint" do
 
       expect(last_response.status).to eq(200)
       expect(JSON.parse(last_response.body)).to include({
-        "token" => user.token
+        "token" => user.reload.token
       })
     end
 

@@ -5,6 +5,7 @@ class Model::User < Sequel::Model
   def self.authenticate(username, pass)
     user = Model::User.find(username: username)
     return false unless user && BCrypt::Password.new(user.password_hash) == pass
+    user.generate_token!
     user
   end
 
@@ -23,6 +24,11 @@ class Model::User < Sequel::Model
       random_token = SecureRandom.urlsafe_base64(nil, false)
       break random_token unless Model::User.find(token: random_token)
     end
+  end
+
+  def generate_token!
+    self.generate_token
+    self.save
   end
 
   def password
